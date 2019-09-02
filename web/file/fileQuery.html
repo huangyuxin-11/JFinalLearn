@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../js/fileInfo.js"></script>
+    <script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>文件查询</title>
+    <style>
+        #filenameField
+        {
+            /*text-align:center;*/
+            height:50px;
+            padding-left: 150px;
+            padding-top: 80px;
+        }
+        #filename
+        {
+            width: 539px;
+            height: 34px;
+            border: 1px solid dodgerblue;
+            position: absolute;
+            left: 50px;
+            top: 40px;
+        }
+        #search-button
+        {
+            width: 100px;
+            height: 37px;
+            color: white;
+            background: #317ef3;
+            border: 0;
+            font-size:medium;
+            position: absolute;
+            top:40px;
+            left: 600px;
+        }
+        #fileTable
+        {
+            font-family: verdana,arial,sans-serif;
+            font-size:17px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+            position: absolute;
+            left: 50px;
+            top: 120px;
+        }
+        #fileTable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: 	#191970;
+            background-color: 	#F0FFFF;
+        }
+        #fileTable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<!--action="/query/fileQuery" method="get"-->
+<body>
+<a href="../index/index.html"><b>返回首页</b></a>
+    <div id="filenameField">
+        <!--filename-->
+        <input type="text" name="filename" id="filename">
+        <button id="search-button"  onclick="buttonquery()">全文搜索</button>
+
+    </div>
+    <!--filecontent: <input type="text" name="filecontent" id="filecontent"><br>-->
+    <!--<button type="reset" value="重置" >重置</button>-->
+    <div class="query-content">
+        <table border="1" id="fileTable">
+            <thead>
+            <tr>
+                <th>  文件名  </th>
+                <th> 文件类型 </th>
+                <th>  文件地址group  </th>
+                <th>  文件地址path  </th>
+                <th>   操作   </th>
+            </tr>
+            </thead>
+            <tbody class="file-info-list"></tbody>
+
+        </table>
+    </div>
+
+
+
+
+
+
+</body>
+</html>

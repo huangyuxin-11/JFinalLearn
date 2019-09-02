@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+    <title>查询结果</title>
+</head>
+#set(x=queryName)
+#set(y=queryContent)
+<body>
+<p>搜索条件： </p><br>
+<ul>
+    fileName:<li id="q1"> </li>
+    fileContent:<li id="q2"> </li>
+</ul>
+<table border="1">
+    <tr>
+        <td>Row 1, cell 1, filename</td>
+    <td>Row 1, cell 2, filetype</td>
+    <td><button onclick="myFunction()">下载</button></td>
+    </tr>
+    <tbody id="tbody1">
+
+        <tr>
+            <td>row 2, cell 1</td>
+            <td>row 2, cell 2</td>
+        </tr>
+    </tbody>
+
+</table>
+<button>点我</button>
+
+
+<!--<script type="text/javascript">-->
+
+    <!--function myFunction(data)-->
+    <!--{-->
+        <!--//这个函数的参数可以是从后台传过来的也可以是从其他任何地方传过来的-->
+        <!--//这里我假设这个data是一个长度为5的字符串数组 我要把他放在表格的一行里面，分成五列-->
+        <!--var tableData="<tr>"-->
+        <!--//动态增加5个td,并且把data数组的五个值赋给每个td-->
+        <!--for(var i=0;i<data.length;i++){-->
+            <!--tableData+="<td>"+data[i]+"</td>"-->
+        <!--}-->
+        <!--tableData+="</tr>"-->
+        <!--//现在tableData已经生成好了，把他赋值给上面的tbody-->
+        <!--$("#tbody1").html(tableData)-->
+    <!--}-->
+<!--</script>-->
+</body>
+
+
+<script>
+    $(document).ready(function(){
+        $("#btn1").click(function(){
+            $("#q1").text("Hello world!");
+        });
+        $("#q1").text("#(x)");
+        $("#q2").text("#(y)");
+
+    });
+
+
+
+</script>
+</html>
