@@ -1,8 +1,14 @@
+
+<head>
+    <link rel="stylesheet" href="../staticCSS/iconfont.css">
+</head>
+
 <form action="/upload/uploadFile" method="post" enctype="multipart/form-data">
     <table>
         <tr>
-            <th>选择文件</th>
-            <td><input type="file" accept="*" name="fileUpload" /></td>
+            <i class="iconfont icon-shangchuan" οnclick="uploadFile('selectfile')"></i>上传
+            <!--<th>选择文件</th>-->
+            <td><input id="selectfile" type="file" accept="*" name="fileUpload" style="display:none"/></td>
         </tr>
         <tr>
             <th><input type="reset" value="重置" /> </th>
@@ -12,3 +18,4 @@
 
     点击<a href="../file/fileQuery.html"><b>此处</b></a>可以查看上传文件。
 </form>
+

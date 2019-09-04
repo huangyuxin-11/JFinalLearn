@@ -77,7 +77,7 @@ public class esSearchService {
     }
 
 
-    public static JSONObject fileSearch(String nameField, String contentField) throws IOException {
+    public static JSONObject fileSearch(String nameField, String contentField, int size ,int from) throws IOException {
 
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices("testindex001");
@@ -87,6 +87,8 @@ public class esSearchService {
         boolQueryBuilder.should(QueryBuilders.matchQuery("filename",nameField));
         boolQueryBuilder.should(QueryBuilders.matchQuery("content",contentField));
 
+        sourceBuilder.from(from); //设置从哪里开始
+        sourceBuilder.size(size); //每页n条
         sourceBuilder.query(boolQueryBuilder);
 
         String[] includes ={"filename","filetype","group","path"};
@@ -105,6 +107,7 @@ public class esSearchService {
 
         SearchResponse searchResponse =client.search(searchRequest, RequestOptions.DEFAULT);
         SearchHits hits =searchResponse.getHits();
+        long totalHits = hits.getTotalHits().value;
         SearchHit[] searchHit = hits.getHits();
 
         JSONObject result = new JSONObject();
@@ -132,6 +135,7 @@ public class esSearchService {
 
         }
         result.put("records",rs);
+        result.put("count",totalHits);
         return result;
 
 

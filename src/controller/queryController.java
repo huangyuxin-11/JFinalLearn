@@ -15,12 +15,15 @@ public class queryController extends Controller {
 //
     public void fileQuery(){
 
+        int from =0, size=10;
+        from =  Integer.parseInt(getPara("from"));
+        size = Integer.parseInt(getPara("size"));
         String fileName =getPara("fileName");
         String fileContent =getPara("fileContent");
         JSONObject result =new JSONObject();
         esSearchService essearchService =new esSearchService();
         try {
-            result = essearchService.fileSearch(fileName,fileContent);
+            result = essearchService.fileSearch(fileName,fileContent,size,from);
         } catch (IOException e) {
             e.printStackTrace();
         }

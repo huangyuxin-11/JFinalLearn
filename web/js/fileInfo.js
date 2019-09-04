@@ -1,9 +1,9 @@
-
-
-function buttonquery() {
+var current_page =1;
+var page_size =10;
+function buttonquery(num) {
     var fileName =$('#filename').val();
     var fileContent =$('#filename').val();
-
+    var from = num;//page from num
     var tbody = document.getElementsByClassName("file-info-list");
     tbody =$(tbody);
     tbody.empty();
@@ -13,21 +13,31 @@ function buttonquery() {
         url:'/query/fileQuery',
         data:{
             "fileName":fileName,
-            "fileContent":fileContent
+            "fileContent":fileContent,
+            "size":2,
+            "from":from
         },
         dataType:"json",
         success:function(result){
             if(result){
                 var data =result.records;
+                var count =result.count;
+                console.log(count);
                 if(data.length == 0){
                     return;
                 }
+
+                renderPage(count,data);
+
+
                 for(var i=0;i<data.length;i++){
                     var tr =renderFile(data[i]);
                     tbody.append(tr);
                 }
+
+
+
             }
-            // window.location.reload();
         }
     });
 
@@ -57,6 +67,36 @@ function renderFile(row){
     tr.append(td6);
 
     return tr;
+}
+function renderPage(count,data) {
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'file-info-list-table', //注意，这里的 test1 是 ID，不用加 # 号
+            count: count ,//数据总数，从服务端得到
+            limit: 2,
+            curr: current_page,
+            layout: ['count', 'prev', 'page', 'next', 'skip'],
+            jump:function (obj, first) {
+                //第一次不执行,一定要记住,这个必须有,要不然就是死循环
+                var curr = obj.curr;
+                //更改存储变量容器中的数据,是之随之更新数据
+                current_page = obj.curr;
+                page_size= obj.limit;
+                if(!first) {
+
+                    //回调该展示数据的方法,数据展示
+                    // renderFileList()
+                    buttonquery(current_page);
+                }
+
+            }
+
+        });
+    });
+
 }
 
 

@@ -3,16 +3,20 @@
 <head>
     <script src="../js/fileInfo.js"></script>
     <script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+    <link rel="stylesheet" href="../staticCSS/iconfont.css">
+
     <meta charset="UTF-8">
     <title>文件查询</title>
     <style>
-        #filenameField
-        {
-            /*text-align:center;*/
-            height:50px;
-            padding-left: 150px;
-            padding-top: 80px;
-        }
+        /*#filenameField*/
+        /*{*/
+            /*!*text-align:center;*!*/
+            /*height:50px;*/
+            /*padding-left: 150px;*/
+            /*padding-top: 110px;*/
+        /*}*/
         #filename
         {
             width: 539px;
@@ -20,7 +24,7 @@
             border: 1px solid dodgerblue;
             position: absolute;
             left: 50px;
-            top: 40px;
+            top: 60px;
         }
         #search-button
         {
@@ -31,7 +35,7 @@
             border: 0;
             font-size:medium;
             position: absolute;
-            top:40px;
+            top:60px;
             left: 600px;
         }
         #fileTable
@@ -61,22 +65,65 @@
             background-color: #ffffff;
             text-align:center;
         }
+        #file-info-list-table{
+            position: absolute;
+            top:50px;
+            left: 700px;
+        }
+        #selectfileicon{
+            position: absolute;
+            top:10px;
+            left: 110px;
+        }
+        #indexhref{
+            position: absolute;
+            top:10px;
+            left: 10px;
+        }
+        #selectfileicon {
+            position:absolute;
+            left:110px;
+            top:0px;
+            /*z-index:-1;*/
+        }
+        #selectfile{
+            position:absolute;
+            left:110px;
+            top:0px;
+            z-index:-1;
+        }
 
     </style>
 </head>
 <!--action="/query/fileQuery" method="get"-->
 <body>
-<a href="../index/index.html"><b>返回首页</b></a>
+<a href="../index/index.html" id="indexhref"><b>返回首页</b></a>
+<form action="/upload/uploadFile" method="post" enctype="multipart/form-data">
+    <table id="selectfield">
+        <tr >
+            <td  class="iconfont icon-shangchuan" id="selectfileicon"> </td>
+            <td><input id="selectfile" type="file" accept="*" name="fileUpload" /></td>
+
+
+        <!--<td><input type="reset" value="重置" /> </td>-->
+        <!--<td><input type="submit" value="上传" /></td>-->
+        </tr>
+    </table>
+
+</form>
+
     <div id="filenameField">
         <!--filename-->
         <input type="text" name="filename" id="filename">
-        <button id="search-button"  onclick="buttonquery()">全文搜索</button>
+        <button id="search-button"  onclick="buttonquery( 0)">全文搜索</button>
 
     </div>
     <!--filecontent: <input type="text" name="filecontent" id="filecontent"><br>-->
     <!--<button type="reset" value="重置" >重置</button>-->
-    <div class="query-content">
+    <div class="query-content" >
+        <div id="file-info-list-table"></div>
         <table border="1" id="fileTable">
+
             <thead>
             <tr>
                 <th>  文件名  </th>
@@ -86,7 +133,7 @@
                 <th>   操作   </th>
             </tr>
             </thead>
-            <tbody class="file-info-list"></tbody>
+            <tbody class="file-info-list" ></tbody>
 
         </table>
     </div>
@@ -94,6 +141,9 @@
 
 
 
+
+<!--οnclick="uploadFile('selectfile')"-->
+<!--style-->
 
 
 </body>
